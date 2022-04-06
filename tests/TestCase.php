@@ -9,7 +9,6 @@
 namespace HughCube\Laravel\HttpClient\Contracts\Tests;
 
 use GuzzleHttp\RequestOptions;
-use HughCube\Laravel\HttpClient\Contracts\Facade;
 use HughCube\Laravel\HttpClient\Contracts\Tests\Package\Package;
 use HughCube\Laravel\HttpClient\Contracts\Tests\Package\ServiceProvider;
 use Illuminate\Config\Repository;
@@ -19,7 +18,7 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 class TestCase extends OrchestraTestCase
 {
     /**
-     * @param  Application  $app
+     * @param Application $app
      *
      * @return array
      */
@@ -31,7 +30,7 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * @param  Application  $app
+     * @param Application $app
      */
     protected function getEnvironmentSetUp($app)
     {
@@ -42,21 +41,21 @@ class TestCase extends OrchestraTestCase
 
             'defaults' => [
                 'http' => [
-                    RequestOptions::TIMEOUT => 10.0,
+                    RequestOptions::TIMEOUT         => 10.0,
                     RequestOptions::CONNECT_TIMEOUT => 10.0,
-                    RequestOptions::READ_TIMEOUT => 10.0,
-                    #RequestOptions::HTTP_ERRORS => false,
+                    RequestOptions::READ_TIMEOUT    => 10.0,
+                    //RequestOptions::HTTP_ERRORS => false,
                     RequestOptions::HEADERS => [
                         'User-Agent' => null,
-                    ]
-                ]
+                    ],
+                ],
             ],
 
             'clients' => [
                 'default' => [
                     'http' => [
-                        'base_uri' => "https://www.baidu.com",
-                    ]
+                        'base_uri' => 'https://www.baidu.com',
+                    ],
                 ],
             ],
         ]);

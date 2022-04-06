@@ -30,6 +30,6 @@ abstract class Facade extends IlluminateFacade
      */
     public static function getFacadeAccessor(): string
     {
-        return lcfirst(Str::afterLast(static::class, "\\"));
+        return lcfirst(Str::afterLast(static::class, '\\'));
     }
 }
