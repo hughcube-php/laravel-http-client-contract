@@ -49,7 +49,6 @@ class Client
 
     protected function pushHttpRequestHandlers(HandlerStack $stack)
     {
-
     }
 
     protected function getHttpHostResolveHandler(): Closure
@@ -67,7 +66,8 @@ class Client
                 }
 
                 /** When YOU forcibly change the host using HTTPS, HTTPS authentication must be disabled. */
-                if ('https' === $request->getUri()->getScheme() && $request->getUri()->getHost() !== $request->getHeaderLine('Host')) {
+                $scheme = $request->getUri()->getScheme();
+                if ('https' === $scheme && $request->getUri()->getHost() !== $request->getHeaderLine('Host')) {
                     $options[RequestOptions::VERIFY] = false;
                 }
 
