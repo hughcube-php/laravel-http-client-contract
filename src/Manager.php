@@ -6,7 +6,7 @@
  * Time: 4:19 下午.
  */
 
-namespace HughCube\Laravel\Package;
+namespace HughCube\Laravel\HttpClient\Contracts;
 
 use Closure;
 use Illuminate\Container\Container as IlluminateContainer;
@@ -17,9 +17,9 @@ use InvalidArgumentException;
 
 /**
  * @property callable|ContainerContract|null $container
- * @mixin Driver
+ * @mixin Client
  */
-class Manager extends IlluminateManager
+abstract class Manager extends IlluminateManager
 {
     /**
      * @param  callable|ContainerContract|null  $container
@@ -47,6 +47,8 @@ class Manager extends IlluminateManager
     {
         return $this->customCreators[$driver]($this, $driver);
     }
+
+    abstract protected function getPackageFacadeAccessor(): string;
 
     /**
      * @return ContainerContract
@@ -90,7 +92,9 @@ class Manager extends IlluminateManager
      */
     protected function getPackageConfig($name = null, $default = null)
     {
-        $key = sprintf('%s.%s', Package::getFacadeAccessor(), $name);
+        $key = $this->getPackageFacadeAccessor();
+        $key = $name ? sprintf('%s.%s', $key, $name) : $key;
+
         return $this->getConfig()->get($key, $default);
     }
 
@@ -107,19 +111,11 @@ class Manager extends IlluminateManager
      */
     protected function createDriver($driver)
     {
-        return $this->makeDriver($this->configuration($driver));
+        return $this->makeClient($this->configuration($driver));
     }
 
-    /**
-     * Make the Driver instance.
-     *
-     * @param  array  $config
-     * @return Driver
-     */
-    public function makeDriver(array $config): Driver
-    {
-        return new Driver($config);
-    }
+
+    abstract public function makeClient(array $config);
 
     /**
      * @return array
@@ -130,22 +126,17 @@ class Manager extends IlluminateManager
     }
 
     /**
-     * Get the configuration for a client.
-     *
-     * @param  string  $name
-     * @return array
-     *
      * @throws InvalidArgumentException
      */
     protected function configuration(string $name): array
     {
         $name = $name ?: $this->getDefaultDriver();
-        $config = $this->getPackageConfig("drivers.$name");
+        $config = $this->getPackageConfig("clients.$name");
 
         if (null === $config) {
-            throw new InvalidArgumentException("Package client [{$name}] not configured.");
+            throw new InvalidArgumentException("client [{$name}] not configured.");
         }
 
-        return array_merge($this->getClientDefaultConfig(), $config);
+        return array_replace_recursive($this->getClientDefaultConfig(), $config);
     }
 }

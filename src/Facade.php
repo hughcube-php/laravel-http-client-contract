@@ -6,20 +6,22 @@
  * Time: 10:31 下午.
  */
 
-namespace HughCube\Laravel\Package;
+namespace HughCube\Laravel\HttpClient\Contracts;
 
+use HughCube\GuzzleHttp\LazyResponse;
 use Illuminate\Support\Facades\Facade as IlluminateFacade;
 use Illuminate\Support\Str;
 
 /**
  * Class Package.
  *
- * @method static Driver driver(string $name = null)
+ * @method static Client client(string $name = null)
+ * @method static LazyResponse request(Request $request)
  *
- * @see \HughCube\Laravel\Package\Manager
- * @see \HughCube\Laravel\Package\ServiceProvider
+ * @see \HughCube\Laravel\HttpClient\Contracts\Manager
+ * @see \HughCube\Laravel\HttpClient\Contracts\ServiceProvider
  */
-class Package extends IlluminateFacade
+abstract class Facade extends IlluminateFacade
 {
     /**
      * Get the registered name of the component.

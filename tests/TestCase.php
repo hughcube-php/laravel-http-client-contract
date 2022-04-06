@@ -6,10 +6,12 @@
  * Time: 11:36 下午.
  */
 
-namespace HughCube\Laravel\Package\Tests;
+namespace HughCube\Laravel\HttpClient\Contracts\Tests;
 
-use HughCube\Laravel\Package\Package;
-use HughCube\Laravel\Package\ServiceProvider as PackageServiceProvider;
+use GuzzleHttp\RequestOptions;
+use HughCube\Laravel\HttpClient\Contracts\Facade;
+use HughCube\Laravel\HttpClient\Contracts\Tests\Package\Package;
+use HughCube\Laravel\HttpClient\Contracts\Tests\Package\ServiceProvider;
 use Illuminate\Config\Repository;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
@@ -24,7 +26,7 @@ class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app): array
     {
         return [
-            PackageServiceProvider::class,
+            ServiceProvider::class,
         ];
     }
 
@@ -33,30 +35,28 @@ class TestCase extends OrchestraTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        $this->setupCache($app);
-
         /** @var Repository $appConfig */
         $appConfig = $app['config'];
-        $appConfig->set(
-            Package::getFacadeAccessor(),
-            (require dirname(__DIR__).'/config/config.php')
-        );
-    }
-
-    /**
-     * @param  Application  $app
-     */
-    protected function setupCache(Application $app)
-    {
-        /** @var Repository $appConfig */
-        $appConfig = $app['config'];
-
-        $appConfig->set('cache', [
+        $appConfig->set(Package::getFacadeAccessor(), [
             'default' => 'default',
-            'stores' => [
+
+            'defaults' => [
+                'http' => [
+                    RequestOptions::TIMEOUT => 10.0,
+                    RequestOptions::CONNECT_TIMEOUT => 10.0,
+                    RequestOptions::READ_TIMEOUT => 10.0,
+                    #RequestOptions::HTTP_ERRORS => false,
+                    RequestOptions::HEADERS => [
+                        'User-Agent' => null,
+                    ]
+                ]
+            ],
+
+            'clients' => [
                 'default' => [
-                    'driver' => 'file',
-                    'path' => sprintf('/tmp/test/%s', md5(serialize([__METHOD__]))),
+                    'http' => [
+                        'base_uri' => "https://www.baidu.com",
+                    ]
                 ],
             ],
         ]);

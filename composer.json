@@ -1,5 +1,5 @@
 {
-    "name": "hughcube/laravel-package",
+    "name": "hughcube/laravel-http-client-contracts",
     "description": "",
     "license": "MIT",
     "authors": [
@@ -9,8 +9,9 @@
         }
     ],
     "require": {
-        "php": "7.*|8.*",
-        "illuminate/support": ">=8.0"
+        "php": ">=7.2",
+        "illuminate/support": "*",
+        "hughcube/guzzle-http": "*"
     },
     "require-dev": {
         "laravel/framework": "*",
@@ -21,21 +22,15 @@
     },
     "autoload": {
         "psr-4": {
-            "HughCube\\Laravel\\Package\\": "src"
+            "HughCube\\Laravel\\HttpClient\\Contracts\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "HughCube\\Laravel\\Package\\Tests\\": "tests"
+            "HughCube\\Laravel\\HttpClient\\Contracts\\Tests\\": "tests"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "HughCube\\Laravel\\Package\\ServiceProvider"
-            ]
-        }
-    },
+    "extra": {},
     "scripts": {
         "test": "phpunit --verbose --coverage-clover=coverage.clover",
         "phpstan": "phpstan analyse -vvv",

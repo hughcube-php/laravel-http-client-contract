@@ -1,11 +1,11 @@
-<h1 align="center"> laravel captcha code </h1>
+<h1 align="center"> Http Client Contracts </h1>
 
 <p>
-    <a href="https://github.com/hughcube-php/laravel-captcha-code/actions?query=workflow%3ATest">
-        <img src="https://github.com/hughcube-php/laravel-captcha-code/workflows/Test/badge.svg" alt="Test Actions status">
+    <a href="https://github.com/hughcube-php/laravel-http-client-contracts/actions?query=workflow%3ATest">
+        <img src="https://github.com/hughcube-php/laravel-http-client-contracts/workflows/Test/badge.svg" alt="Test Actions status">
     </a>
-    <a href="https://github.com/hughcube-php/laravel-captcha-code/actions?query=workflow%3ALint">
-        <img src="https://github.com/hughcube-php/laravel-captcha-code/workflows/Lint/badge.svg" alt="Lint Actions status">
+    <a href="https://github.com/hughcube-php/laravel-http-client-contracts/actions?query=workflow%3ALint">
+        <img src="https://github.com/hughcube-php/laravel-http-client-contracts/workflows/Lint/badge.svg" alt="Lint Actions status">
     </a>
     <a href="https://styleci.io/repos/217659566">
         <img src="https://github.styleci.io/repos/217659566/shield?branch=master" alt="StyleCI">
@@ -15,13 +15,13 @@
 ## Installing
 
 ```shell
-$ composer require hughcube/laravel-captcha-code -vvv
+$ composer require hughcube/laravel-http-client-contracts -vvv
 ```
 
 ## Configuration
 
 ```shell
-$ php artisan vendor:publish --provider="HughCube\Laravel\CaptchaCode\ServiceProvider"
+$ php artisan vendor:publish --provider="HughCube\Laravel\HttpClient\Contracts\ServiceProvider"
 ```
 
 ## Usage

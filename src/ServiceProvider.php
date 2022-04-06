@@ -6,25 +6,25 @@
  * Time: 10:32 下午.
  */
 
-namespace HughCube\Laravel\Package;
+namespace HughCube\Laravel\HttpClient\Contracts;
 
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
 
-class ServiceProvider extends IlluminateServiceProvider
+abstract class ServiceProvider extends IlluminateServiceProvider
 {
     /**
      * Boot the provider.
      */
     public function boot()
     {
-        $source = realpath(dirname(__DIR__).'/config/config.php');
-
-        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
-            $this->publishes([$source => config_path(sprintf("%s.php", Package::getFacadeAccessor()))]);
-        } elseif ($this->app instanceof LumenApplication) {
-            $this->app->configure(Package::getFacadeAccessor());
+        if (!empty($source = $this->getConfigSource())) {
+            if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
+                $this->publishes([$source => config_path(sprintf("%s.php", $this->getPackageFacadeAccessor()))]);
+            } elseif ($this->app instanceof LumenApplication) {
+                $this->app->configure($this->getPackageFacadeAccessor());
+            }
         }
     }
 
@@ -33,8 +33,18 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Package::getFacadeAccessor(), function ($app) {
-            return new Manager();
+        $this->app->singleton($this->getPackageFacadeAccessor(), function ($app) {
+            return $this->createManager($app);
         });
     }
+
+    protected function getConfigSource(): ?string
+    {
+        //return realpath(dirname(__DIR__).'/config/config.php');
+        return null;
+    }
+
+    abstract protected function createManager($app);
+
+    abstract protected function getPackageFacadeAccessor(): string;
 }

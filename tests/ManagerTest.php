@@ -6,25 +6,15 @@
  * Time: 11:45 下午.
  */
 
-namespace HughCube\Laravel\Package\Tests;
+namespace HughCube\Laravel\HttpClient\Contracts\Tests;
+
+use HughCube\Laravel\HttpClient\Contracts\Tests\Package\Manager;
+use HughCube\Laravel\HttpClient\Contracts\Tests\Package\Package;
 
 class ManagerTest extends TestCase
 {
-    /**
-     * @dataProvider configProvider
-     */
-    public function testStore($config)
+    public function testStore()
     {
-        $this->assertTrue(true);
-    }
-
-    /**
-     * @return array[]
-     */
-    public function configProvider(): array
-    {
-        return [
-            [],
-        ];
+        $this->assertInstanceOf(Manager::class, Package::getFacadeRoot());
     }
 }
