@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: hugh.li
  * Date: 2021/8/12
- * Time: 16:33
+ * Time: 16:33.
  */
 
 namespace HughCube\Laravel\HttpClient\Contracts;
@@ -24,7 +24,7 @@ abstract class Request
     protected $httpOptions = [];
 
     /**
-     * @param  Client  $client
+     * @param Client $client
      */
     public function __construct(Client $client)
     {
@@ -45,7 +45,8 @@ abstract class Request
 
     protected function createResponse(LazyResponse $response): Response
     {
-        $class = sprintf("%sResponse", Str::beforeLast(static::class, 'Request'));
+        $class = sprintf('%sResponse', Str::beforeLast(static::class, 'Request'));
+
         return new $class($response);
     }
 

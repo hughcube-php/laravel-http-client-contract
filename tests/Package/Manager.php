@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: hugh.li
  * Date: 2022/4/6
- * Time: 12:17
+ * Time: 12:17.
  */
 
 namespace HughCube\Laravel\HttpClient\Contracts\Tests\Package;
