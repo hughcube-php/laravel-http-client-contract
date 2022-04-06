@@ -7,8 +7,8 @@
     <a href="https://github.com/hughcube-php/laravel-http-client-contracts/actions?query=workflow%3ALint">
         <img src="https://github.com/hughcube-php/laravel-http-client-contracts/workflows/Lint/badge.svg" alt="Lint Actions status">
     </a>
-    <a href="https://styleci.io/repos/217659566">
-        <img src="https://github.styleci.io/repos/217659566/shield?branch=master" alt="StyleCI">
+    <a href="https://styleci.io/repos/478384152">
+        <img src="https://github.styleci.io/repos/478384152/shield?branch=master" alt="StyleCI">
     </a>
 </p>
 
