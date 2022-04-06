@@ -49,14 +49,12 @@ class Client
 
     protected function pushHttpRequestHandlers(HandlerStack $stack)
     {
-
     }
 
     protected function getHttpHostResolveHandler(): Closure
     {
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
-
                 if (!$request->hasHeader('Host')) {
                     $request = $request->withHeader('Host', $request->getUri()->getHost());
                 }

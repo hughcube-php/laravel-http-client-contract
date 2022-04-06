@@ -21,7 +21,7 @@ abstract class ServiceProvider extends IlluminateServiceProvider
     {
         if (!empty($source = $this->getConfigSource())) {
             if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
-                $this->publishes([$source => config_path(sprintf("%s.php", $this->getPackageFacadeAccessor()))]);
+                $this->publishes([$source => config_path(sprintf('%s.php', $this->getPackageFacadeAccessor()))]);
             } elseif ($this->app instanceof LumenApplication) {
                 $this->app->configure($this->getPackageFacadeAccessor());
             }
