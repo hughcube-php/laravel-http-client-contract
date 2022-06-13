@@ -36,6 +36,19 @@ class Client
         return [];
     }
 
+    /**
+     * @param  int|string|null  $name
+     * @param  mixed  $default
+     * @return mixed
+     */
+    public function getConfig($name = null, $default = null)
+    {
+        if (null === $name) {
+            return $this->config;
+        }
+        return Arr::get($this->config, $name, $default);
+    }
+
     protected function createHttpClient(): HttpClient
     {
         $config = $this->config['http'] ?? [];
