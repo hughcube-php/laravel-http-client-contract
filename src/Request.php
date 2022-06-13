@@ -8,6 +8,7 @@
 
 namespace HughCube\Laravel\HttpClient\Contracts;
 
+use GuzzleHttp\RequestOptions;
 use HughCube\GuzzleHttp\LazyResponse;
 use Illuminate\Support\Str;
 
@@ -24,7 +25,7 @@ abstract class Request
     protected $httpOptions = [];
 
     /**
-     * @param Client $client
+     * @param  Client  $client
      */
     public function __construct(Client $client)
     {
@@ -53,5 +54,41 @@ abstract class Request
     public function request(): Response
     {
         return $this->createResponse($this->client->request($this));
+    }
+
+    /**
+     * @param  int|string  $name
+     * @param  mixed  $value
+     * @return $this
+     */
+    public function withQueryValue($name, $value)
+    {
+        $this->httpOptions[RequestOptions::QUERY][$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param  int|string  $name
+     * @param  mixed  $value
+     * @return $this
+     */
+    public function withJsonValue($name, $value)
+    {
+        $this->httpOptions[RequestOptions::JSON][$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param  int|string  $name
+     * @param  mixed  $value
+     * @return $this
+     */
+    public function withFormValue($name, $value)
+    {
+        $this->httpOptions[RequestOptions::FORM_PARAMS][$name] = $value;
+
+        return $this;
     }
 }
