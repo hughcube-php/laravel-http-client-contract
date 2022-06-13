@@ -42,6 +42,11 @@ abstract class Request
         return $this->httpOptions;
     }
 
+    public function getClient(): Client
+    {
+        return $this->client;
+    }
+
     abstract public function getUri(): string;
 
     protected function createResponse(LazyResponse $response): Response
