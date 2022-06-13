@@ -25,7 +25,7 @@ abstract class Request
     protected $httpOptions = [];
 
     /**
-     * @param  Client  $client
+     * @param Client $client
      */
     public function __construct(Client $client)
     {
@@ -57,8 +57,9 @@ abstract class Request
     }
 
     /**
-     * @param  int|string  $name
-     * @param  mixed  $value
+     * @param int|string $name
+     * @param mixed      $value
+     *
      * @return $this
      */
     public function withQueryValue($name, $value)
@@ -69,8 +70,9 @@ abstract class Request
     }
 
     /**
-     * @param  int|string  $name
-     * @param  mixed  $value
+     * @param int|string $name
+     * @param mixed      $value
+     *
      * @return $this
      */
     public function withJsonValue($name, $value)
@@ -81,8 +83,9 @@ abstract class Request
     }
 
     /**
-     * @param  int|string  $name
-     * @param  mixed  $value
+     * @param int|string $name
+     * @param mixed      $value
+     *
      * @return $this
      */
     public function withFormValue($name, $value)
