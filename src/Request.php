@@ -67,6 +67,15 @@ abstract class Request
         return $this->createResponse($this->getClient()->request($this));
     }
 
+    public function when($when, callable $callable)
+    {
+        if ($when) {
+            $callable($this);
+        }
+
+        return $this;
+    }
+
     public function whenEmpty($value, callable $callable)
     {
         if (empty($value)) {
