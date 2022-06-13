@@ -29,7 +29,7 @@ abstract class Manager extends IlluminateManager
         $this->container = $container;
     }
 
-    public function getClient($driver = null)
+    public function client($driver = null)
     {
         return $this->driver($driver);
     }
