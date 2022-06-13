@@ -59,7 +59,7 @@ abstract class Request
     public function whenEmpty($value, callable $callable)
     {
         if (empty($value)) {
-            $callable($this, $value);
+            $callable($value, $this);
         }
 
         return $this;
@@ -68,7 +68,7 @@ abstract class Request
     public function whenNotEmpty($value, callable $callable)
     {
         if (!empty($value)) {
-            $callable($this, $value);
+            $callable($value, $this);
         }
 
         return $this;
@@ -77,7 +77,7 @@ abstract class Request
     public function whenNull($value, callable $callable)
     {
         if (null === $value) {
-            $callable($this, $value);
+            $callable($value, $this);
         }
 
         return $this;
@@ -86,7 +86,7 @@ abstract class Request
     public function whenNotNull($value, callable $callable)
     {
         if (null !== $value) {
-            $callable($this, $value);
+            $callable($value, $this);
         }
 
         return $this;
