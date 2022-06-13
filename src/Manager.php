@@ -22,11 +22,16 @@ use InvalidArgumentException;
 abstract class Manager extends IlluminateManager
 {
     /**
-     * @param callable|ContainerContract|null $container
+     * @param  callable|ContainerContract|null  $container
      */
     public function __construct($container = null)
     {
         $this->container = $container;
+    }
+
+    public function getClient($driver = null)
+    {
+        return $this->driver($driver);
     }
 
     /**
@@ -40,7 +45,7 @@ abstract class Manager extends IlluminateManager
     /**
      * Call a custom driver creator.
      *
-     * @param string $driver
+     * @param  string  $driver
      *
      * @return mixed
      */
@@ -68,11 +73,11 @@ abstract class Manager extends IlluminateManager
     }
 
     /**
-     * @throws
-     *
      * @return Repository
      *
      * @phpstan-ignore-next-line
+     * @throws
+     *
      */
     protected function getConfig(): Repository
     {
@@ -88,8 +93,8 @@ abstract class Manager extends IlluminateManager
     }
 
     /**
-     * @param null|string|int $name
-     * @param mixed           $default
+     * @param  null|string|int  $name
+     * @param  mixed  $default
      *
      * @return array|mixed
      */
