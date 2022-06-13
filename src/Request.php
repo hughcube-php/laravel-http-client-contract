@@ -25,7 +25,7 @@ abstract class Request
     protected $httpOptions = [];
 
     /**
-     * @param  Client  $client
+     * @param Client $client
      */
     public function __construct(Client $client)
     {
@@ -113,8 +113,8 @@ abstract class Request
     }
 
     /**
-     * @param  int|string  $name
-     * @param  mixed  $value
+     * @param int|string $name
+     * @param mixed      $value
      *
      * @return $this
      */
@@ -127,6 +127,7 @@ abstract class Request
 
     /**
      * @param string|mixed $value
+     *
      * @return $this
      */
     public function withBaseUri($value)
@@ -135,8 +136,8 @@ abstract class Request
     }
 
     /**
-     * @param  int|string  $name
-     * @param  mixed  $value
+     * @param int|string $name
+     * @param mixed      $value
      *
      * @return $this
      */
@@ -148,8 +149,8 @@ abstract class Request
     }
 
     /**
-     * @param  int|string  $name
-     * @param  mixed  $value
+     * @param int|string $name
+     * @param mixed      $value
      *
      * @return $this
      */
@@ -161,8 +162,8 @@ abstract class Request
     }
 
     /**
-     * @param  int|string  $name
-     * @param  mixed  $value
+     * @param int|string $name
+     * @param mixed      $value
      *
      * @return $this
      */
