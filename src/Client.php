@@ -37,8 +37,9 @@ class Client
     }
 
     /**
-     * @param  int|string|null  $name
-     * @param  mixed  $default
+     * @param int|string|null $name
+     * @param mixed           $default
+     *
      * @return mixed
      */
     public function getConfig($name = null, $default = null)
@@ -46,6 +47,7 @@ class Client
         if (null === $name) {
             return $this->config;
         }
+
         return Arr::get($this->config, $name, $default);
     }
 
