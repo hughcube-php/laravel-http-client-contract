@@ -25,7 +25,7 @@ abstract class Request
     protected $httpOptions = [];
 
     /**
-     * @param Client $client
+     * @param  Client  $client
      */
     public function __construct(Client $client)
     {
@@ -56,9 +56,27 @@ abstract class Request
         return $this->createResponse($this->client->request($this));
     }
 
+    public function whenEmpty($value, callable $callable)
+    {
+        if (empty($value)) {
+            $callable($this, $value);
+        }
+
+        return $this;
+    }
+
+    public function whenNotEmpty($value, callable $callable)
+    {
+        if (!empty($value)) {
+            $callable($this, $value);
+        }
+
+        return $this;
+    }
+
     /**
-     * @param int|string $name
-     * @param mixed      $value
+     * @param  int|string  $name
+     * @param  mixed  $value
      *
      * @return $this
      */
@@ -70,8 +88,8 @@ abstract class Request
     }
 
     /**
-     * @param int|string $name
-     * @param mixed      $value
+     * @param  int|string  $name
+     * @param  mixed  $value
      *
      * @return $this
      */
@@ -83,8 +101,8 @@ abstract class Request
     }
 
     /**
-     * @param int|string $name
-     * @param mixed      $value
+     * @param  int|string  $name
+     * @param  mixed  $value
      *
      * @return $this
      */
