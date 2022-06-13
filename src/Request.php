@@ -74,6 +74,24 @@ abstract class Request
         return $this;
     }
 
+    public function whenNull($value, callable $callable)
+    {
+        if (null === $value) {
+            $callable($this, $value);
+        }
+
+        return $this;
+    }
+
+    public function whenNotNull($value, callable $callable)
+    {
+        if (null !== $value) {
+            $callable($this, $value);
+        }
+
+        return $this;
+    }
+
     /**
      * @param int|string $name
      * @param mixed      $value
