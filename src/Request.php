@@ -109,6 +109,28 @@ abstract class Request
      *
      * @return $this
      */
+    public function with($name, $value)
+    {
+        $this->httpOptions[$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string|mixed $value
+     * @return $this
+     */
+    public function withBaseUri($value)
+    {
+        return $this->with('base_uri', $value);
+    }
+
+    /**
+     * @param  int|string  $name
+     * @param  mixed  $value
+     *
+     * @return $this
+     */
     public function withQueryValue($name, $value)
     {
         $this->httpOptions[RequestOptions::QUERY][$name] = $value;
