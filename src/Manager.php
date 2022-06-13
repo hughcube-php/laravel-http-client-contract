@@ -124,7 +124,7 @@ abstract class Manager extends IlluminateManager
      */
     protected function getClientDefaultConfig(): array
     {
-        return $this->getConfig()->get('defaults', []);
+        return $this->getPackageConfig('defaults', []);
     }
 
     /**
