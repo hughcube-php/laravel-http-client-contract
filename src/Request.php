@@ -30,6 +30,8 @@ abstract class Request
     public function __construct(Client $client)
     {
         $this->client = $client;
+
+        $this->initialize();
     }
 
     protected function initialize()
