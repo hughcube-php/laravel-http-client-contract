@@ -8,6 +8,7 @@
 
 namespace HughCube\Laravel\HttpClient\Contracts;
 
+use BadMethodCallException;
 use Closure;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\RequestOptions;
@@ -15,6 +16,7 @@ use HughCube\GuzzleHttp\Client as HttpClient;
 use HughCube\GuzzleHttp\HttpClientTrait;
 use HughCube\GuzzleHttp\LazyResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Psr\Http\Message\RequestInterface;
 
 class Client
@@ -37,8 +39,8 @@ class Client
     }
 
     /**
-     * @param int|string|null $name
-     * @param mixed           $default
+     * @param  int|string|null  $name
+     * @param  mixed  $default
      *
      * @return mixed
      */
@@ -47,7 +49,6 @@ class Client
         if (null === $name) {
             return $this->config;
         }
-
         return Arr::get($this->config, $name, $default);
     }
 
@@ -99,8 +100,24 @@ class Client
         );
     }
 
-//    public function createTestRequest(): TestRequest
-//    {
-//        return new TestRequest($this);
-//    }
+    public function __call($name, $arguments)
+    {
+        if (Str::startsWith($name, $prefix = 'getConfig')) {
+            $config = $this->getConfig();
+
+            $key = Str::afterLast($name, $prefix);
+            if (array_key_exists($key, $config)) {
+                return $config[$key];
+            }
+
+            $key = Str::snake(Str::afterLast($name, $prefix));
+            if (array_key_exists($key, $this->getConfig())) {
+                return $config[$key];
+            }
+
+            return $arguments[0] ?? null;
+        }
+
+        throw new BadMethodCallException(sprintf("Method '%s' does not exist!", $name));
+    }
 }
