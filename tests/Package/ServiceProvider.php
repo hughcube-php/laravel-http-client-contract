@@ -10,13 +10,16 @@ namespace HughCube\Laravel\HttpClient\Contracts\Tests\Package;
 
 class ServiceProvider extends \HughCube\Laravel\HttpClient\Contracts\ServiceProvider
 {
-    protected function createManager($app): Manager
-    {
-        return new Manager();
-    }
-
     protected function getPackageFacadeAccessor(): string
     {
         return Package::getFacadeAccessor();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function createPackageFacadeRoot($app)
+    {
+        return new Manager();
     }
 }

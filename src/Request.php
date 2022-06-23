@@ -25,7 +25,7 @@ abstract class Request
     protected $httpOptions = [];
 
     /**
-     * @param Client $client
+     * @param  Client  $client
      */
     public function __construct(Client $client)
     {
@@ -67,7 +67,10 @@ abstract class Request
         return $this->createResponse($this->getClient()->request($this));
     }
 
-    public function when($when, callable $callable)
+    /**
+     * @return $this
+     */
+    public function when($when, callable $callable): Request
     {
         if ($when) {
             $callable($this);
@@ -76,7 +79,10 @@ abstract class Request
         return $this;
     }
 
-    public function whenEmpty($value, callable $callable)
+    /**
+     * @return $this
+     */
+    public function whenEmpty($value, callable $callable): Request
     {
         if (empty($value)) {
             $callable($value, $this);
@@ -85,7 +91,10 @@ abstract class Request
         return $this;
     }
 
-    public function whenNotEmpty($value, callable $callable)
+    /**
+     * @return $this
+     */
+    public function whenNotEmpty($value, callable $callable): Request
     {
         if (!empty($value)) {
             $callable($value, $this);
@@ -94,7 +103,10 @@ abstract class Request
         return $this;
     }
 
-    public function whenNull($value, callable $callable)
+    /**
+     * @return $this
+     */
+    public function whenNull($value, callable $callable): Request
     {
         if (null === $value) {
             $callable($value, $this);
@@ -103,7 +115,10 @@ abstract class Request
         return $this;
     }
 
-    public function whenNotNull($value, callable $callable)
+    /**
+     * @return $this
+     */
+    public function whenNotNull($value, callable $callable): Request
     {
         if (null !== $value) {
             $callable($value, $this);
@@ -113,12 +128,12 @@ abstract class Request
     }
 
     /**
-     * @param int|string $name
-     * @param mixed      $value
+     * @param  int|string  $name
+     * @param  mixed  $value
      *
      * @return $this
      */
-    public function with($name, $value)
+    public function with($name, $value): Request
     {
         $this->httpOptions[$name] = $value;
 
@@ -126,22 +141,22 @@ abstract class Request
     }
 
     /**
-     * @param string|mixed $value
+     * @param  string|mixed  $value
      *
      * @return $this
      */
-    public function withBaseUri($value)
+    public function withBaseUri($value): Request
     {
         return $this->with('base_uri', $value);
     }
 
     /**
-     * @param int|string $name
-     * @param mixed      $value
+     * @param  int|string  $name
+     * @param  mixed  $value
      *
      * @return $this
      */
-    public function withQueryValue($name, $value)
+    public function withQueryValue($name, $value): Request
     {
         $this->httpOptions[RequestOptions::QUERY][$name] = $value;
 
@@ -149,12 +164,12 @@ abstract class Request
     }
 
     /**
-     * @param int|string $name
-     * @param mixed      $value
+     * @param  int|string  $name
+     * @param  mixed  $value
      *
      * @return $this
      */
-    public function withJsonValue($name, $value)
+    public function withJsonValue($name, $value): Request
     {
         $this->httpOptions[RequestOptions::JSON][$name] = $value;
 
@@ -162,12 +177,12 @@ abstract class Request
     }
 
     /**
-     * @param int|string $name
-     * @param mixed      $value
+     * @param  int|string  $name
+     * @param  mixed  $value
      *
      * @return $this
      */
-    public function withFormValue($name, $value)
+    public function withFormValue($name, $value): Request
     {
         $this->httpOptions[RequestOptions::FORM_PARAMS][$name] = $value;
 

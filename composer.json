@@ -10,8 +10,8 @@
     ],
     "require": {
         "php": ">=7.2",
-        "illuminate/support": "*",
-        "hughcube/guzzle-http": "*"
+        "hughcube/guzzle-http": "*",
+        "hughcube/laravel-service-support": "^1.0"
     },
     "require-dev": {
         "laravel/framework": "*",
@@ -30,7 +30,13 @@
             "HughCube\\Laravel\\HttpClient\\Contracts\\Tests\\": "tests"
         }
     },
-    "extra": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HughCube\\Laravel\\Package\\ServiceProvider"
+            ]
+        }
+    },
     "scripts": {
         "test": "phpunit --verbose --coverage-clover=coverage.clover",
         "phpstan": "phpstan analyse -vvv",

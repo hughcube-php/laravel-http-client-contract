@@ -17,6 +17,8 @@ abstract class Response
      */
     protected $httpResponse;
 
+    private $bodyArray;
+
     public function __construct(LazyResponse $httpResponse)
     {
         $this->httpResponse = $httpResponse;
@@ -32,4 +34,17 @@ abstract class Response
     abstract public function getMessage();
 
     abstract public function isSuccess(): bool;
+
+    public function getBodyArray(): ?array
+    {
+        if (null === $this->bodyArray) {
+            $this->bodyArray = $this->httpResponse->toArray();
+        }
+        return $this->bodyArray;
+    }
+
+    public function __get($name)
+    {
+        return $this->getBodyArray()[$name] ?? null;
+    }
 }

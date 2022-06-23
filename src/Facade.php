@@ -9,7 +9,7 @@
 namespace HughCube\Laravel\HttpClient\Contracts;
 
 use HughCube\GuzzleHttp\LazyResponse;
-use Illuminate\Support\Facades\Facade as IlluminateFacade;
+use HughCube\Laravel\ServiceSupport\LazyFacade;
 use Illuminate\Support\Str;
 
 /**
@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
  * @see \HughCube\Laravel\HttpClient\Contracts\Manager
  * @see \HughCube\Laravel\HttpClient\Contracts\ServiceProvider
  */
-abstract class Facade extends IlluminateFacade
+abstract class Facade extends LazyFacade
 {
     /**
      * Get the registered name of the component.
