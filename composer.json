@@ -30,13 +30,6 @@
             "HughCube\\Laravel\\HttpClient\\Contracts\\Tests\\": "tests"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "HughCube\\Laravel\\Package\\ServiceProvider"
-            ]
-        }
-    },
     "scripts": {
         "test": "phpunit --verbose --coverage-clover=coverage.clover",
         "phpstan": "phpstan analyse -vvv",
