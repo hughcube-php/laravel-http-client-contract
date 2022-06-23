@@ -15,10 +15,7 @@ class ServiceProvider extends \HughCube\Laravel\HttpClient\Contracts\ServiceProv
         return Package::getFacadeAccessor();
     }
 
-    /**
-     * @inheritDoc
-     */
-    protected function createPackageFacadeRoot($app)
+    protected function createManager($app): Manager
     {
         return new Manager();
     }
