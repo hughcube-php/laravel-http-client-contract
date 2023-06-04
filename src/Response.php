@@ -17,16 +17,25 @@ abstract class Response
      */
     protected $httpResponse;
 
-    private $bodyArray;
+    /**
+     * @var null|Request
+     */
+    protected $request = null;
 
-    public function __construct(LazyResponse $httpResponse)
+    public function __construct(LazyResponse $httpResponse, $request = null)
     {
         $this->httpResponse = $httpResponse;
+        $this->request = $request;
     }
 
     public function getHttpResponse(): LazyResponse
     {
         return $this->httpResponse;
+    }
+
+    public function getRequest(): ?Request
+    {
+        return $this->request;
     }
 
     abstract public function getCode();
@@ -37,10 +46,7 @@ abstract class Response
 
     public function getBodyArray(): ?array
     {
-        if (null === $this->bodyArray) {
-            $this->bodyArray = $this->httpResponse->toArray();
-        }
-        return $this->bodyArray;
+        return $this->httpResponse->toArray(false);
     }
 
     public function __get($name)

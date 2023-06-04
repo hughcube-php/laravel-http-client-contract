@@ -59,7 +59,7 @@ abstract class Request
     {
         $class = sprintf('%sResponse', Str::beforeLast(static::class, 'Request'));
 
-        return new $class($response);
+        return new $class($response, $this);
     }
 
     public function request(): Response
